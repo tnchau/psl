@@ -40,7 +40,7 @@ window.onload = function() {
 
     requestAnimationFrame(loop);
 
-    statusLabel.innerHTML = 'Give it a good spin!';
+    statusLabel.innerHTML = 'What are you willing to do?';
 };
 
 function initDrawingCanvas() {
@@ -70,12 +70,6 @@ function checkStartDrag(e) {
 
         world.addConstraint(mouseConstraint);
     }
-
-    if (wheelSpinning === true) {
-        wheelSpinning = false;
-        wheelStopped = true;
-        statusLabel.innerHTML = "Impatience will not be rewarded.";
-    }
 }
 
 function checkEndDrag(e) {
@@ -89,10 +83,6 @@ function checkEndDrag(e) {
                 wheelStopped = false;
                 console.log('good spin');
                 statusLabel.innerHTML = '...clack clack clack clack clack clack...'
-            }
-            else {
-                console.log('sissy');
-                statusLabel.innerHTML = 'Come on, you can spin harder than that.'
             }
         }
     }
@@ -125,7 +115,7 @@ function initPhysics() {
         arrowX = wheelX,
         arrowY = wheelY + wheelRadius + 0.625;
 
-    wheel = new Wheel(wheelX, wheelY, wheelRadius, 32, 0.25, 7.5);
+    wheel = new Wheel(wheelX, wheelY, wheelRadius, 16, 0.25, 7.5);
     wheel.body.angle = (Math.PI / 32.5);
     wheel.body.angularVelocity = 5;
     arrow = new Arrow(arrowX, arrowY, 0.5, 1.5);
@@ -169,13 +159,6 @@ function update() {
 
         wheel.body.angularVelocity = 0;
 
-        if (win) {
-            spawnPartices();
-            statusLabel.innerHTML = 'Woop woop!'
-        }
-        else {
-            statusLabel.innerHTML = 'Too bad! Invite a Facebook friend to try again!';
-        }
     }
 }
 
@@ -270,7 +253,7 @@ Wheel.prototype = {
         ctx.rotate(-this.body.angle);
 
         for (var i = 0; i < this.segments; i++) {
-            ctx.fillStyle = (i % 2 === 0) ? '#BD4932' : '#FFFAD5';
+            ctx.fillStyle = (i % 2 === 0) ? '#00704a' : '#ffffff';
             ctx.beginPath();
             ctx.arc(0, 0, this.pRadius, i * this.deltaPI, (i + 1) * this.deltaPI);
             ctx.lineTo(0, 0);
